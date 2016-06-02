@@ -1,12 +1,13 @@
 package com.yasmin.clases;
 
 import com.yasmin.bd.ConexionBD;
+import com.yasmin.ventanas.BuscarImagen;
+import com.yasmin.ventanas.Stock;
 import static com.yasmin.ventanas.Stock.anadirCat;
 import static com.yasmin.ventanas.Stock.anadirCod;
 import static com.yasmin.ventanas.Stock.anadirNom;
 import static com.yasmin.ventanas.Stock.anadirPre;
 import static com.yasmin.ventanas.Stock.anadirStock;
-
 import static com.yasmin.ventanas.Stock.busCod;
 import static com.yasmin.ventanas.Stock.busquedaCat;
 import static com.yasmin.ventanas.Stock.busquedaCod;
@@ -16,8 +17,12 @@ import static com.yasmin.ventanas.Stock.busquedaStock;
 import static com.yasmin.ventanas.Stock.imagen;
 import static com.yasmin.ventanas.Stock.jTable1;
 import static com.yasmin.ventanas.Stock.jTable2;
-
-
+import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,8 +40,10 @@ public class Articulos {
 
     ConexionBD cc = new ConexionBD();
     Connection cn = cc.ConexionBD();
-
-    public void listaArticulos() throws SQLException {
+    
+    
+    
+    public void listaArticulos() throws SQLException, IOException {
         String id = busCod.getText();
         try {
             String consultarArticulos = "SELECT * FROM articulo WHERE idarticulo= '" + id + "'";
@@ -49,13 +56,15 @@ public class Articulos {
                 busquedaPre.setText(rs.getString(3));
                 busquedaStock.setText(rs.getString(4));
                 busquedaCat.setText(rs.getString(5));
-                imagen.setText(rs.getString(6));
-                ImageIcon image = new ImageIcon(rs.getString(6));
+                Image i=null;
+                Blob blob = rs.getBlob(6);
+                i= javax.imageio.ImageIO.read(blob.getBinaryStream());
+                ImageIcon image = new ImageIcon(i);
                 imagen.setIcon(image);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en la visualizacion ");
+            //JOptionPane.showMessageDialog(null, "Error en la visualizacion ");
         }
 
     }
@@ -87,8 +96,11 @@ public class Articulos {
         }
     }
     
-    public void insertArticulos() {
-        String insert = "INSERT INTO articulo (idarticulo,descripcion,precio,stock,codcategoria) VALUES(?,?,?,?,?)";
+    public void insertArticulos() throws FileNotFoundException {
+        String insert = "INSERT INTO articulo (idarticulo,descripcion,precio,stock,codcategoria,imagen) VALUES(?,?,?,?,?,?)";
+        BuscarImagen bi = new BuscarImagen();
+        FileInputStream foto;
+        Stock s = new Stock();
         try {
             PreparedStatement st = cn.prepareStatement(insert);
             st.setInt(1, Integer.parseInt(anadirCod.getText()));
@@ -96,6 +108,10 @@ public class Articulos {
             st.setString(3, anadirPre.getText());
             st.setString(4, anadirStock.getText());
             st.setString(5, anadirCat.getText());
+            
+            File file = new File(s.ruta);
+            foto = new FileInputStream(file);
+            st.setBinaryStream(6,foto,(int)file.length());
             st.executeUpdate();
             visualizaTablaInsercion();
             JOptionPane.showMessageDialog(null,"Registro correcto");
@@ -103,7 +119,6 @@ public class Articulos {
             JOptionPane.showMessageDialog(null,"Error al registrar");
         }
     }
-    
     
     public void visualizarTablaDeletes(){
         DefaultTableModel modelo = new DefaultTableModel();
