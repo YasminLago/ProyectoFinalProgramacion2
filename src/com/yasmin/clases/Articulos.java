@@ -42,7 +42,11 @@ public class Articulos {
     Connection cn = cc.ConexionBD();
     
     
-    
+    /**
+     * Metodo que muestra las caracteristicas del producto que buscas a partir del codigo
+     * @throws SQLException
+     * @throws IOException 
+     */
     public void listaArticulos() throws SQLException, IOException {
         String id = busCod.getText();
         try {
@@ -68,7 +72,10 @@ public class Articulos {
         }
 
     }
-
+    
+    /**
+     * Muestra todos los articulos en la tabla de inserciones
+     */
     public void visualizaTablaInsercion() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Código");
@@ -96,6 +103,10 @@ public class Articulos {
         }
     }
     
+    /**
+     * Registra productos nuevos
+     * @throws FileNotFoundException 
+     */
     public void insertArticulos() throws FileNotFoundException {
         String insert = "INSERT INTO articulo (idarticulo,descripcion,precio,stock,codcategoria,imagen) VALUES(?,?,?,?,?,?)";
         BuscarImagen bi = new BuscarImagen();
@@ -120,6 +131,9 @@ public class Articulos {
         }
     }
     
+    /**
+     * Muestra todos los articulos en la tabla de eliminaciones
+     */
     public void visualizarTablaDeletes(){
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Código");
@@ -146,6 +160,10 @@ public class Articulos {
             System.out.println("Imposible visualizar ");
         }
     }
+    
+    /**
+     * Elimina el articulo que se selecciona
+     */
     public void deleteArticulos(){
         int fila=jTable2.getSelectedRow();
         String cod="";
@@ -161,6 +179,9 @@ public class Articulos {
         }
     }
     
+    /**
+     * Modifica un producto
+     */
     public void modificarProducto(){
         String update = "UPDATE articulo SET "
                 + "descripcion ='" + busquedaNom.getText() 
