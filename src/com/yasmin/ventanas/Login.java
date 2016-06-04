@@ -1,8 +1,22 @@
 package com.yasmin.ventanas;
 
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+import com.yasmin.bd.ConexionBD;
 import com.yasmin.clases.Empleados;
+import static com.yasmin.ventanas.JDialog.lPreguntaDialog;
+import static com.yasmin.ventanas.JDialog.lImagenJD;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.net.URL;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -12,9 +26,18 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
+        e.llenarCBTipoUsers();
+        //bAceptar.setMnemonic('');
     }
+        Empleados e = new Empleados();
+        JDialog j = new JDialog();
+        ConexionBD cc = new ConexionBD();
+        Connection cn = cc.ConexionBD();
     
-    Empleados e = new Empleados();
+    
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,7 +66,8 @@ public class Login extends javax.swing.JFrame {
         lTipoUser.setText("Tipo de Usuario:");
         jPanel1.add(lTipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        tipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tipoUser.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+        tipoUser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione tipo de usuario" }));
         jPanel1.add(tipoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, -1));
 
         lUser.setFont(new java.awt.Font("Vani", 1, 14)); // NOI18N
@@ -67,11 +91,26 @@ public class Login extends javax.swing.JFrame {
 
         bAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/tickt.png"))); // NOI18N
         bAceptar.setText("Aceptar");
-        jPanel1.add(bAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 100, 30));
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAceptarActionPerformed(evt);
+            }
+        });
+        bAceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bAceptarKeyPressed(evt);
+            }
+        });
+        jPanel1.add(bAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 110, 30));
 
         bSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/aspat.png"))); // NOI18N
         bSalir.setText("  Salir");
-        jPanel1.add(bSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 100, 30));
+        bSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 110, 30));
 
         fondoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/bubble.png"))); // NOI18N
         jPanel1.add(fondoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -90,6 +129,44 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        if(e.login()==1){
+          this.dispose();
+          JOptionPane.showMessageDialog(null,"Login correcto");
+          Stock2 s = new Stock2();
+          s.setVisible(true);
+      }else{
+          JOptionPane.showMessageDialog(null,"Usuario y/o contraseña incorrecta");
+      }
+    }//GEN-LAST:event_bAceptarActionPerformed
+
+    private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
+       /*String ruta = "com/yasmin/imagenes/trist";
+       URL url = getClass().getResource(ruta);
+       ImageIcon icon = new ImageIcon(url);
+       lImagenJD.setIcon(icon);*/
+        if(evt.getSource()==bSalir){
+           lPreguntaDialog.setText("¿Está seguro de que desea salir?");
+           
+           j.setVisible(true);
+       } 
+    }//GEN-LAST:event_bSalirActionPerformed
+
+    private void bAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bAceptarKeyPressed
+        int code = evt.getKeyCode();
+        char caracter = evt.getKeyChar(); 
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            
+            if(e.login()==1){
+          this.dispose();
+          JOptionPane.showMessageDialog(null,"Login correcto");
+          Stock2 s = new Stock2();
+          s.setVisible(true);
+      }else{
+          JOptionPane.showMessageDialog(null,"Usuario y/o contraseña incorrecta");
+      }
+    }//GEN-LAST:event_bAceptarKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAceptar;
@@ -103,7 +180,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel logoTipoUser;
     private javax.swing.JLabel logoUser;
     public static javax.swing.JPasswordField pass;
-    private javax.swing.JComboBox tipoUser;
+    public static javax.swing.JComboBox tipoUser;
     public static javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,8 @@ package com.yasmin.ventanas;
 import com.yasmin.bd.ConexionBD;
 import com.yasmin.clases.Productos;
 import static com.yasmin.ventanas.BuscarImagen.cargarImagen;
+import static com.yasmin.ventanas.Login.tipoUser;
+import static com.yasmin.ventanas.Login.user;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,30 +30,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Yasmín
  */
 public class Stock2 extends javax.swing.JFrame implements Runnable{
-
-    public Stock2() {
-        initComponents();
-            hilo = new Thread(this);
-            hilo.start();
-            this.setLocationRelativeTo(null);
-            bReparar.setToolTipText("Equipos para reparar");
-            bSalir.setToolTipText("Salir");
-            bAdminUsers.setToolTipText("Administrar usuarios");
-            bEmpleados.setToolTipText("Información empleados");
-            bPresupuesto.setToolTipText("Presupuestos");
-            bTiendaOn.setToolTipText("Ir a tienda Online");
-            bCobrar.setToolTipText("Cobrar");
-            bArqueo.setToolTipText("Arqueo de caja");
-            //opcProd.setVisible(false); 
-    }
+    
+    ConexionBD cc = new ConexionBD();
+    Connection cn = cc.ConexionBD();
+    Productos p = new Productos();
+    ArqueoCaja ac = new ArqueoCaja();
     
     Thread hilo;
     int numDia = 0;
     int numMes = 0;
     String date,year,dia,mes,hora,minutos,segundos;
-    ConexionBD cc = new ConexionBD();
-    Connection cn = cc.ConexionBD();
-    Productos p = new Productos();
     File fichero;
     public String ruta;
     
@@ -79,7 +67,45 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         "Noviembre",
         "Diciembre"
     };
-     
+    
+    public Stock2() {
+        initComponents();
+        
+            hilo = new Thread(this);
+            hilo.start();
+            this.setLocationRelativeTo(null);//Ventana centrada
+            bReparar.setToolTipText("Equipos para reparar");
+            bSalir.setToolTipText("Salir");
+            bAdminUsers.setToolTipText("Administrar usuarios");
+            bEmpleados.setToolTipText("Información empleados");
+            bPresupuesto.setToolTipText("Presupuestos");
+            bTiendaOn.setToolTipText("Ir a tienda Online");
+            bCobrar.setToolTipText("Cobrar");
+            bArqueo.setToolTipText("Arqueo de caja");
+            //opcProd.setVisible(false); 
+            lConectUser.setText(user.getText());
+            lTipoCUser.setText((String) tipoUser.getSelectedItem());
+            
+            privilegios();
+                
+    }
+    
+    /**
+     * Marca o desmarca botones en función del tipo de 
+     * usuario conectado y cambia la imagen de fondo
+     */
+    public void privilegios(){
+        if(tipoUser.getSelectedItem().equals("Empleado")){
+                bEmpleados.setEnabled(false);
+                bAdminUsers.setEnabled(false);
+                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/verde.jpg")));
+            } else {
+                bEmpleados.setEnabled(true);
+                bAdminUsers.setEnabled(true);
+                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/azul.jpg")));
+            }
+    }
+    
     @Override
     public void run() {  
         Thread ct = Thread.currentThread();
@@ -92,7 +118,7 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         }
     }
     /**
-     * Fechas y hora actuales
+     * Fecha y hora actuales
      */
     public void fecha() {
         Calendar calendario = new GregorianCalendar();
@@ -122,9 +148,9 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         toolBarDate = new javax.swing.JToolBar();
         lDate = new javax.swing.JLabel();
         lUsuario = new javax.swing.JLabel();
-        lConnectUser = new javax.swing.JLabel();
+        lConectUser = new javax.swing.JLabel();
         lTipo = new javax.swing.JLabel();
-        lTipoConnect = new javax.swing.JLabel();
+        lTipoCUser = new javax.swing.JLabel();
         bArqueo = new javax.swing.JButton();
         bCobrar = new javax.swing.JButton();
         bAdminUsers = new javax.swing.JButton();
@@ -150,21 +176,26 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         lDate.setText("date");
         toolBarDate.add(lDate);
 
-        lUsuario.setText("Usuario: ");
+        lUsuario.setText("                                                                                                                         Usuario: ");
         toolBarDate.add(lUsuario);
 
-        lConnectUser.setText("user");
-        toolBarDate.add(lConnectUser);
+        lConectUser.setText(" user");
+        toolBarDate.add(lConectUser);
 
-        lTipo.setText("Tipo: ");
+        lTipo.setText("        Tipo: ");
         toolBarDate.add(lTipo);
 
-        lTipoConnect.setText("type");
-        toolBarDate.add(lTipoConnect);
+        lTipoCUser.setText(" type");
+        toolBarDate.add(lTipoCUser);
 
         JPanel.add(toolBarDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 605, 720, 30));
 
         bArqueo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/arqueoCaja.png"))); // NOI18N
+        bArqueo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bArqueoActionPerformed(evt);
+            }
+        });
         JPanel.add(bArqueo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 90, 70));
 
         bCobrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/cobrar.png"))); // NOI18N
@@ -174,6 +205,11 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         JPanel.add(bAdminUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 90, 70));
 
         bEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/verEmpleado.png"))); // NOI18N
+        bEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEmpleadosActionPerformed(evt);
+            }
+        });
         JPanel.add(bEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 90, 70));
 
         bTiendaOn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/tiendaOnline.png"))); // NOI18N
@@ -187,8 +223,6 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
 
         bSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/salir.png"))); // NOI18N
         JPanel.add(bSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 90, 70));
-
-        fondoStock2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Yasmín\\Desktop\\fondosproyecto2\\verde.jpg")); // NOI18N
         JPanel.add(fondoStock2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 630));
 
         menuVer.setText("Ver");
@@ -232,6 +266,14 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
        // opcProd.setVisible(true);        
     }//GEN-LAST:event_itemProdActionPerformed
 
+    private void bEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEmpleadosActionPerformed
+      
+    }//GEN-LAST:event_bEmpleadosActionPerformed
+
+    private void bArqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArqueoActionPerformed
+        ac.setVisible(true);
+    }//GEN-LAST:event_bArqueoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel;
     private javax.swing.JButton bAdminUsers;
@@ -245,10 +287,10 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
     public static javax.swing.JLabel fondoStock2;
     private javax.swing.JMenuItem itemProd;
     private javax.swing.JMenu jMenu3;
-    public static javax.swing.JLabel lConnectUser;
+    public static javax.swing.JLabel lConectUser;
     private javax.swing.JLabel lDate;
     private javax.swing.JLabel lTipo;
-    public static javax.swing.JLabel lTipoConnect;
+    public static javax.swing.JLabel lTipoCUser;
     private javax.swing.JLabel lUsuario;
     private javax.swing.JMenuItem menuItemCat;
     private javax.swing.JMenu menuVer;

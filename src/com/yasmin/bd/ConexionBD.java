@@ -9,10 +9,12 @@ import java.sql.Statement;
  * @author Yasmín
  */
 public class ConexionBD {
-    String user = "ylagorebollar";
+    //String user = "ylagorebollar";
+    String user = "root";
     String pass = "ylagorebollar";
     String driver = "com.mysql.jdbc.Driver";
-    String url = "jdbc:mysql://10.0.0.254/ylagorebollar";
+    //String url = "jdbc:mysql://10.0.0.254/ylagorebollar";
+    String url = "jdbc:mysql://localhost/controldestock2";
     Statement s = null;
     Connection conectar=null;
     
