@@ -4,7 +4,8 @@ import com.yasmin.bd.ConexionBD;
 import static com.yasmin.ventanas.Login.pass;
 import static com.yasmin.ventanas.Login.tipoUser;
 import static com.yasmin.ventanas.Login.user;
-import static com.yasmin.ventanas.Stock2.fondoStock2;
+import static com.yasmin.ventanas.Usuarios.tablaU;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -70,6 +72,39 @@ public class Empleados {
             }  
         } catch (SQLException ex) {
         }
+    }
+    
+    public void listaUsuarios() throws SQLException, IOException {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("DNI");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Tipo de Usuario");
+        modelo.addColumn("Clave");
+        tablaU.setModel(modelo);
+        
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM empleados");
+            String[] datos = new String[5];
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
+                datos[6] = rs.getString(7);
+                modelo.addRow(datos);
+            }
+            tablaU.setModel(modelo);
+
+        } catch (SQLException ex) {
+            System.out.println("Imposible visualizar ");
+        }
+
     }
     
     

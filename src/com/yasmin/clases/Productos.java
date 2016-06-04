@@ -168,7 +168,7 @@ public class Productos {
         int fila=jTable2.getSelectedRow();
         String cod="";
         cod=jTable2.getValueAt(fila,0).toString();
-        String delete = "DELETE FROM articulo WHERE idarticulo ='" + cod + "'";
+        String delete = "DELETE FROM producto WHERE idarticulo ='" + cod + "'";
         try {
             PreparedStatement ps = cn.prepareStatement(delete);
             ps.executeUpdate();
@@ -183,7 +183,7 @@ public class Productos {
      * Modifica un producto
      */
     public void modificarProductos(){
-        String update = "UPDATE articulo SET "
+        String update = "UPDATE producto SET "
                 + "descripcion ='" + busquedaNom.getText() 
                 +"',precio =" + busquedaPre.getText()
                 +",stock= " + busquedaStock.getText()

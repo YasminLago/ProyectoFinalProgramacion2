@@ -95,15 +95,19 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
      * usuario conectado y cambia la imagen de fondo
      */
     public void privilegios(){
-        if(tipoUser.getSelectedItem().equals("Empleado")){
+        if(tipoUser.getSelectedItem().equals("Empleado")) {
                 bEmpleados.setEnabled(false);
                 bAdminUsers.setEnabled(false);
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/verde.jpg")));
-            } else {
+        if(tipoUser.getSelectedItem().equals("Administrador")) {
                 bEmpleados.setEnabled(true);
                 bAdminUsers.setEnabled(true);
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/azul.jpg")));
-            }
+        } else {
+                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/invitado.jpg")));
+        }
+            
+        }
     }
     
     @Override
