@@ -104,7 +104,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lUsuario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="                                                                                                                         Usuario: "/>
+                <Property name="text" type="java.lang.String" value="                                                                   Usuario: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lConectUser">
@@ -151,6 +151,9 @@
               <Image iconType="3" name="/com/yasmin/imagenes/cobrar.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCobrarActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="90" height="70"/>
@@ -163,6 +166,9 @@
               <Image iconType="3" name="/com/yasmin/imagenes/usuarios.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAdminUsersActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="540" y="0" width="90" height="70"/>

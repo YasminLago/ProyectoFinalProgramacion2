@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.yasmin.ventanas;
 
 import com.yasmin.bd.ConexionBD;
@@ -24,15 +19,21 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author Yasmín
+ */
 
 public class VProductos extends javax.swing.JFrame {
     
-    private Object fichero;
-    Productos p = new Productos();
     ConexionBD cc = new ConexionBD();
     Connection cn = cc.ConexionBD();
+    private Object fichero;
+    Productos p = new Productos();
+    BuscarImagen bi = new BuscarImagen();
     
-    public VProductos() {
+    
+    public VProductos() throws SQLException, IOException{
         initComponents();
         busquedaCod.setEditable(false);
         busquedaNom.setEditable(false);
@@ -464,7 +465,7 @@ public class VProductos extends javax.swing.JFrame {
         //ruta = cargarImagen.getSelectedFile().getAbsolutePath();
 
         int resultado;
-        BuscarImagen bi = new BuscarImagen();
+        
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG y PNG","jpg","png");
         cargarImagen.setFileFilter(filter);
         resultado = cargarImagen.showOpenDialog(null);

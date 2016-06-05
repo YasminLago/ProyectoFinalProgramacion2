@@ -2,6 +2,7 @@ package com.yasmin.clases;
 
 import com.yasmin.bd.ConexionBD;
 import com.yasmin.ventanas.BuscarImagen;
+import static com.yasmin.ventanas.Caja.tarticulosCaja;
 import com.yasmin.ventanas.Stock2;
 import static com.yasmin.ventanas.VProductos.anadirCat;
 import static com.yasmin.ventanas.VProductos.anadirCod;
@@ -18,6 +19,7 @@ import static com.yasmin.ventanas.VProductos.imagen;
 import static com.yasmin.ventanas.VProductos.jTable1;
 import static com.yasmin.ventanas.VProductos.jTable2;
 
+import static com.yasmin.ventanas.Caja.autoCompletar;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,7 +43,8 @@ public class Productos {
 
     ConexionBD cc = new ConexionBD();
     Connection cn = cc.ConexionBD();
-    
+    BuscarImagen bi = new BuscarImagen();
+   
     
     /**
      * Metodo que muestra las caracteristicas del producto que buscas a partir del codigo
@@ -52,8 +55,8 @@ public class Productos {
         String id = busCod.getText();
         try {
             String consultarArticulos = "SELECT * FROM productos WHERE codp= '" + id + "'";
-            Statement ps = cn.createStatement();
-            ResultSet rs = ps.executeQuery(consultarArticulos);
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(consultarArticulos);
 
             while (rs.next()) {
                 busquedaCod.setText(rs.getString(1));
@@ -109,9 +112,7 @@ public class Productos {
      */
     public void insertarProductos() throws FileNotFoundException {
         String insert = "INSERT INTO articulo (idarticulo,descripcion,precio,stock,codcategoria,imagen) VALUES(?,?,?,?,?,?)";
-        BuscarImagen bi = new BuscarImagen();
-        FileInputStream foto;
-        Stock2 s = new Stock2();
+        FileInputStream foto;     
         try {
             PreparedStatement st = cn.prepareStatement(insert);
             st.setInt(1, Integer.parseInt(anadirCod.getText()));
@@ -198,4 +199,28 @@ public class Productos {
     }
     
     
+    
+    /**
+     * Métodos Clase Caja
+     * 
+     * 
+     */
+    
+    
+    public ResultSet getListaProductos()throws Exception{
+        ResultSet rs;
+        try {
+            Statement st = cn.createStatement();
+            rs = st.executeQuery("SELECT * FROM productos");
+      } catch (Exception e) {
+          throw e;
+      }
+      return rs;           
+    }
+    
+    /**
+     * 
+     * 
+     * Fin métodos Clase Caja
+     */
 }

@@ -1,7 +1,9 @@
 package com.yasmin.bd;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -9,6 +11,10 @@ import java.sql.Statement;
  * @author Yasmín
  */
 public class ConexionBD {
+
+    public ConexionBD() {
+    }
+    
     //String user = "ylagorebollar";
     String user = "root";
     String pass = "ylagorebollar";

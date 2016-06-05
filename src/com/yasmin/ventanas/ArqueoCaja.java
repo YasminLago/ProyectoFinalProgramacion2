@@ -33,8 +33,8 @@ public class ArqueoCaja extends javax.swing.JFrame {
         sumImporteB.setEditable(false);
         sumTotal.setEditable(false);
         
-        cantidadM1.setSelectionStart(0);
-        /*cantidadM2.setText("0");
+        cantidadM1.setText("0");
+        cantidadM2.setText("0");
         cantidadM5.setText("0");
         cantidadM10.setText("0");
         cantidadM20.setText("0");
@@ -47,7 +47,7 @@ public class ArqueoCaja extends javax.swing.JFrame {
         cantidadB50.setText("0");
         cantidadB100.setText("0");
         cantidadB200.setText("0");
-        cantidadB500.setText("0");*/
+        cantidadB500.setText("0");
     }
     
     /*public void focusGained(java.awt.event.FocusEvent evt){

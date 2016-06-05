@@ -29,12 +29,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Yasmín
  */
-public class Stock2 extends javax.swing.JFrame implements Runnable{
+public final class Stock2 extends javax.swing.JFrame implements Runnable{
     
     ConexionBD cc = new ConexionBD();
     Connection cn = cc.ConexionBD();
-    Productos p = new Productos();
+    Caja c = new Caja();
     ArqueoCaja ac = new ArqueoCaja();
+    Usuarios u = new Usuarios();
     
     Thread hilo;
     int numDia = 0;
@@ -68,7 +69,7 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         "Diciembre"
     };
     
-    public Stock2() {
+    public Stock2(){
         initComponents();
         
             hilo = new Thread(this);
@@ -99,13 +100,12 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
                 bEmpleados.setEnabled(false);
                 bAdminUsers.setEnabled(false);
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/verde.jpg")));
-        if(tipoUser.getSelectedItem().equals("Administrador")) {
+        }else if(tipoUser.getSelectedItem().equals("Administrador")) {
                 bEmpleados.setEnabled(true);
                 bAdminUsers.setEnabled(true);
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/azul.jpg")));
         } else {
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/invitado.jpg")));
-        }
             
         }
     }
@@ -180,7 +180,7 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         lDate.setText("date");
         toolBarDate.add(lDate);
 
-        lUsuario.setText("                                                                                                                         Usuario: ");
+        lUsuario.setText("                                                                   Usuario: ");
         toolBarDate.add(lUsuario);
 
         lConectUser.setText(" user");
@@ -203,9 +203,19 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
         JPanel.add(bArqueo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 90, 70));
 
         bCobrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/cobrar.png"))); // NOI18N
+        bCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCobrarActionPerformed(evt);
+            }
+        });
         JPanel.add(bCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 70));
 
         bAdminUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/usuarios.png"))); // NOI18N
+        bAdminUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAdminUsersActionPerformed(evt);
+            }
+        });
         JPanel.add(bAdminUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 90, 70));
 
         bEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/verEmpleado.png"))); // NOI18N
@@ -277,6 +287,14 @@ public class Stock2 extends javax.swing.JFrame implements Runnable{
     private void bArqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArqueoActionPerformed
         ac.setVisible(true);
     }//GEN-LAST:event_bArqueoActionPerformed
+
+    private void bAdminUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAdminUsersActionPerformed
+        u.setVisible(true);
+    }//GEN-LAST:event_bAdminUsersActionPerformed
+
+    private void bCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCobrarActionPerformed
+        c.setVisible(true);
+    }//GEN-LAST:event_bCobrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel;

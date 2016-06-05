@@ -8,6 +8,7 @@ import static com.yasmin.ventanas.JDialog.lPreguntaDialog;
 import static com.yasmin.ventanas.JDialog.lImagenJD;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -23,7 +24,13 @@ import javax.swing.JOptionPane;
  * @author Yasmín
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    ConexionBD cc = new ConexionBD();
+    Connection cn = cc.ConexionBD();
+    Empleados e = new Empleados();
+    JDialog j = new JDialog();
+        
+    
     public Login() {
         initComponents();
         
@@ -31,10 +38,7 @@ public class Login extends javax.swing.JFrame {
         e.llenarCBTipoUsers();
         //bAceptar.setMnemonic('');
     }
-        Empleados e = new Empleados();
-        JDialog j = new JDialog();
-        ConexionBD cc = new ConexionBD();
-        Connection cn = cc.ConexionBD();
+        
     
     
    
@@ -96,11 +100,6 @@ public class Login extends javax.swing.JFrame {
                 bAceptarActionPerformed(evt);
             }
         });
-        bAceptar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                bAceptarKeyPressed(evt);
-            }
-        });
         jPanel1.add(bAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 110, 30));
 
         bSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/yasmin/imagenes/aspat.png"))); // NOI18N
@@ -132,7 +131,7 @@ public class Login extends javax.swing.JFrame {
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
         if(e.login()==1){
           this.dispose();
-          JOptionPane.showMessageDialog(null,"Login correcto");
+          JOptionPane.showMessageDialog(null,"Login correcto");  
           Stock2 s = new Stock2();
           s.setVisible(true);
       }else{
@@ -141,31 +140,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-       /*String ruta = "com/yasmin/imagenes/trist";
-       URL url = getClass().getResource(ruta);
-       ImageIcon icon = new ImageIcon(url);
-       lImagenJD.setIcon(icon);*/
         if(evt.getSource()==bSalir){
            lPreguntaDialog.setText("¿Está seguro de que desea salir?");
-           
            j.setVisible(true);
-       } 
+        } 
     }//GEN-LAST:event_bSalirActionPerformed
-
-    private void bAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bAceptarKeyPressed
-        int code = evt.getKeyCode();
-        char caracter = evt.getKeyChar(); 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-            
-            if(e.login()==1){
-          this.dispose();
-          JOptionPane.showMessageDialog(null,"Login correcto");
-          Stock2 s = new Stock2();
-          s.setVisible(true);
-      }else{
-          JOptionPane.showMessageDialog(null,"Usuario y/o contraseña incorrecta");
-      }
-    }//GEN-LAST:event_bAceptarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
