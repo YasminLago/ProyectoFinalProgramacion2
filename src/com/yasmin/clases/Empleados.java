@@ -4,14 +4,20 @@ import com.yasmin.bd.ConexionBD;
 import static com.yasmin.ventanas.Login.pass;
 import static com.yasmin.ventanas.Login.tipoUser;
 import static com.yasmin.ventanas.Login.user;
-import static com.yasmin.ventanas.Usuarios.apeU;
-import static com.yasmin.ventanas.Usuarios.claveU;
-import static com.yasmin.ventanas.Usuarios.dirU;
-import static com.yasmin.ventanas.Usuarios.dniU;
-import static com.yasmin.ventanas.Usuarios.nomU;
-import static com.yasmin.ventanas.Usuarios.tablaU;
-import static com.yasmin.ventanas.Usuarios.telU;
-import static com.yasmin.ventanas.Usuarios.tpU;
+import static com.yasmin.ventanas.VEmpleados.apeE;
+import static com.yasmin.ventanas.VEmpleados.dirE;
+import static com.yasmin.ventanas.VEmpleados.dniE;
+import static com.yasmin.ventanas.VEmpleados.nomE;
+import static com.yasmin.ventanas.VEmpleados.tablaE;
+import static com.yasmin.ventanas.VEmpleados.telE;
+import static com.yasmin.ventanas.VEmpleados.tpE;
+
+import static com.yasmin.ventanas.VUsuarios.claveU;
+
+import static com.yasmin.ventanas.VUsuarios.nomU;
+import static com.yasmin.ventanas.VUsuarios.tablaU;
+
+import static com.yasmin.ventanas.VUsuarios.tpU;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -94,19 +100,19 @@ public class Empleados {
      * Fin métodos para la Clase Login
      */
     
-    
-    /**
-     * Métodos para la Clase Usuarios
+
+     /**
+     * Métodos para la Clase VEmpleados
      * 
      * 
      */
     
     /**
-     * Muesta los datos de los distintos Usuarios en la 'tablaU'
+     * Muesta los datos de los distintos empleados en la 'tablaE'
      * @throws SQLException
      * @throws IOException 
      */
-    public void listaTablaUsuarios() {
+    public void listaTablaEmpleados() {
         DefaultTableModel modelo = new DefaultTableModel();
         ListSelectionModel lsm;
         modelo.addColumn("DNI");
@@ -114,25 +120,25 @@ public class Empleados {
         modelo.addColumn("Apellidos");
         modelo.addColumn("Direccion");
         modelo.addColumn("Teléfono");
-        modelo.addColumn("Tipo Usuario");
-        modelo.addColumn("Clave");
-        tablaU.setModel(modelo);
+        modelo.addColumn("Tipo Empleado");
+        
+        tablaE.setModel(modelo);
         
         try {
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT code,nome,apee,diree,telee,tipo,clave FROM empleados e,usuarios u WHERE e.codu=u.codu");      
-            String[] datos = new String[7];
+            ResultSet rs = st.executeQuery("SELECT code,nome,apee,diree,telee,tipoE FROM empleados e,tipoempleados t WHERE e.cod=t.cod");      
+            String[] datos = new String[6];
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);
                 datos[2] = rs.getString(3);
                 datos[3] = rs.getString(4);
                 datos[4] = rs.getString(5);
-                datos [5] = rs.getString(6);
-                datos[6] = rs.getString(7);
+                datos[5] = rs.getString(6);
+                
                 modelo.addRow(datos);
             }
-            tablaU.setModel(modelo);
+            tablaE.setModel(modelo);
 
         } catch (SQLException ex) {
             System.out.println("Imposible visualizar ");
@@ -141,45 +147,45 @@ public class Empleados {
     }
     
     /**
-     * Llena el ComboBox 'tpU' con información contenida en la columna tipo de la tabla usuarios
+     * Llena el ComboBox 'tpE' con información contenida en la columna tipo de la tabla usuarios
      */
-     public final void llenarCBTpU(){
+    public final void llenarCBTpE(){
         try {
-            String tipoUsers = "SELECT * FROM usuarios";
+            String tipoEmpleados = "SELECT * FROM tipoempleados";
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(tipoUsers);
+            ResultSet rs = st.executeQuery(tipoEmpleados);
             while (rs.next()) {               
-                tpU.addItem(rs.getObject("tipo"));  
+                tpE.addItem(rs.getObject("tipoE"));  
             }  
         } catch (SQLException ex) {
         }
     }
      
      /**
-      * Modifica los datos del usuarios seleccionado
+      * Modifica los datos del empleado seleccionado
       */
-     public void modificarUsuarios()throws SQLException, IOException{
+    public void modificarEmpleados()throws SQLException, IOException{
          int cod = 0 ;
          try{
-         String select ="SELECT codu FROM usuarios WHERE tipo='"+tpU.getSelectedItem()+"'";
+         String select ="SELECT cod FROM tipoempleados WHERE tipoE='"+tpE.getSelectedItem()+"'";
          Statement st2 = cn.createStatement();
          ResultSet rs = st2.executeQuery(select);
          while (rs.next())
-             cod = (int) rs.getObject("codu");
+             cod = (int) rs.getObject("cod");
  
         String update = "UPDATE empleados SET "
-                + "code =" + dniU.getText() 
-                +",nome ='" + nomU.getText()
-                +"',apee ='" + apeU.getText()
-                +"',diree ='" + dirU.getText() 
-                +"',telee =" + telU.getText() 
-                +",codu =" + cod
-                +",clave ='" + claveU.getText() + "' WHERE code=" + dniU.getText();     
+                + "code =" + dniE.getText() 
+                +",nome ='" + nomE.getText()
+                +"',apee ='" + apeE.getText()
+                +"',diree ='" + dirE.getText() 
+                +"',telee =" + telE.getText() 
+                +",cod =" + cod
+                +" WHERE code=" + dniE.getText();     
          
         try {
             Statement st= cn.createStatement();
             st.executeUpdate(update);
-            listaTablaUsuarios();
+            listaTablaEmpleados();
             JOptionPane.showMessageDialog(null,"Usuario modificado");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al modificar el usuario");
@@ -189,30 +195,30 @@ public class Empleados {
          }
     }
      /**
-      * Añade nuevos usuarios
+      * Añade nuevos empleados
       * @throws SQLException
       * @throws IOException 
       */   
-     public void insertUsuarios() throws SQLException, IOException{    
+    public void insertEmpleados() throws SQLException, IOException{    
         int cod = 0 ;
         try {
-         String select ="SELECT codu FROM usuarios WHERE tipo='"+tpU.getSelectedItem()+"'";
+         String select ="SELECT cod FROM tipoempleados WHERE tipoE='"+tpE.getSelectedItem()+"'";
          Statement st2 = cn.createStatement();
          ResultSet rs = st2.executeQuery(select);
          while (rs.next())
-             cod = (int) rs.getObject("codu");
-         
-        String insert = "INSERT INTO empleados (code,nome,apee,diree,telee,codu,clave) VALUES(?,?,?,?,?,?,?)";
+             cod = (int) rs.getObject("cod");
+        
+        String insert = "INSERT INTO empleados (code,nome,apee,diree,telee,cod) VALUES(?,?,?,?,?,?)";
             PreparedStatement st = cn.prepareStatement(insert);
-            st.setInt(1, Integer.parseInt(dniU.getText()));
-            st.setString(2, nomU.getText());
-            st.setString(3, apeU.getText());
-            st.setString(4, dirU.getText());
-            st.setInt(5, Integer.parseInt(telU.getText()));
+            st.setInt(1, Integer.parseInt(dniE.getText()));
+            st.setString(2, nomE.getText());
+            st.setString(3, apeE.getText());
+            st.setString(4, dirE.getText());
+            st.setInt(5, Integer.parseInt(telE.getText()));         
             st.setInt(6, cod);
-            st.setString(7, claveU.getText());
+         
             st.executeUpdate();
-            listaTablaUsuarios();
+            listaTablaEmpleados();
             JOptionPane.showMessageDialog(null,"Registro correcto");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al registrar");
@@ -220,30 +226,30 @@ public class Empleados {
     }
     
      /**
-      * Elimina usuarios
+      * Elimina empleados
       * @throws SQLException
       * @throws IOException 
       */
-    public void eliminarUsuarios()throws SQLException, IOException{
-        int fila=tablaU.getSelectedRow();
+    public void eliminarEmpleados()throws SQLException, IOException{
+        int fila=tablaE.getSelectedRow();
         String cod="";
-        cod=tablaU.getValueAt(fila,0).toString();
+        cod=tablaE.getValueAt(fila,0).toString();
         String delete = "DELETE FROM empleados WHERE code ='" + cod + "'";
         try {
             PreparedStatement ps = cn.prepareStatement(delete);
             ps.executeUpdate();
-            listaTablaUsuarios();
+            listaTablaEmpleados();
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"El usuario que has elegido no se puede eliminar ");
+            JOptionPane.showMessageDialog(null,"El empleado que has elegido no se puede eliminar ");
         }
     }
-      
-    
+
     /**
      * 
      * 
-     * Fin métodos para la Clase Usuarios
+     * Fin métodos para la Clase VEmpleados
      */
 
+    
     }

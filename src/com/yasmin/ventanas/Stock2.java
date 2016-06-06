@@ -35,7 +35,7 @@ public final class Stock2 extends javax.swing.JFrame implements Runnable{
     Connection cn = cc.ConexionBD();
     Caja c = new Caja();
     ArqueoCaja ac = new ArqueoCaja();
-    Usuarios u = new Usuarios();
+    VUsuarios u = new VUsuarios();
     
     Thread hilo;
     int numDia = 0;
@@ -99,11 +99,11 @@ public final class Stock2 extends javax.swing.JFrame implements Runnable{
         if(tipoUser.getSelectedItem().equals("Empleado")) {
                 bEmpleados.setEnabled(false);
                 bAdminUsers.setEnabled(false);
-                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/verde.jpg")));
+                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/invitado.jpg")));
         }else if(tipoUser.getSelectedItem().equals("Administrador")) {
                 bEmpleados.setEnabled(true);
                 bAdminUsers.setEnabled(true);
-                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/azul.jpg")));
+                fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/administrador.jpg")));
         } else {
                 fondoStock2.setIcon(new ImageIcon(getClass().getResource("/com/yasmin/imagenes/invitado.jpg")));
             
