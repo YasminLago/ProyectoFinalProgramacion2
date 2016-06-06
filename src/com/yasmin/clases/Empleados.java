@@ -57,7 +57,7 @@ public class Empleados {
         String passw = String.valueOf(pass.getPassword());
         String tipoU = String.valueOf(tipoUser.getSelectedItem());
         int resultado = 0;
-        String SSQL = "SELECT * FROM empleados WHERE nome = '" + usuario + "' AND  clave ='" + passw + "' AND codu IN (SELECT codu FROM USUARIOS WHERE tipo = '" + tipoU + "')";
+        String SSQL = "SELECT * FROM usuarios WHERE nomu = '" + usuario + "' AND  clave ='" + passw + "' AND codu IN (SELECT codu FROM tipousuarios WHERE tipo = '" + tipoU + "')";
         ConexionBD cc = new ConexionBD();
         
         try {
@@ -85,7 +85,7 @@ public class Empleados {
      */
     public final void llenarCBTipoUsers(){
         try {
-            String tipoUsers = "SELECT * FROM usuarios";
+            String tipoUsers = "SELECT * FROM tipousuarios";
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(tipoUsers);
             while (rs.next()) {               

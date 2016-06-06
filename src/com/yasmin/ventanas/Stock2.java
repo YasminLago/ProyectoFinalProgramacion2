@@ -36,6 +36,7 @@ public final class Stock2 extends javax.swing.JFrame implements Runnable{
     Caja c = new Caja();
     ArqueoCaja ac = new ArqueoCaja();
     VUsuarios u = new VUsuarios();
+    VEmpleados v = new VEmpleados();
     
     Thread hilo;
     int numDia = 0;
@@ -281,7 +282,7 @@ public final class Stock2 extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_itemProdActionPerformed
 
     private void bEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEmpleadosActionPerformed
-      
+        v.setVisible(true);
     }//GEN-LAST:event_bEmpleadosActionPerformed
 
     private void bArqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArqueoActionPerformed

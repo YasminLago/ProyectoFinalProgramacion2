@@ -17,8 +17,8 @@ import java.sql.SQLException;
 public class ProyectoFinalProgramacion2 {
 
     public static void main(String[] args) {
-        //Login l = new Login();
-       // l.setVisible(true);
+        Login l = new Login();
+        l.setVisible(true);
         //Stock2 s = new Stock2();
         //s.setVisible(true);
         
@@ -26,12 +26,12 @@ public class ProyectoFinalProgramacion2 {
         //v.setVisible(true);
         //ArqueoCaja ac = new ArqueoCaja();
         //ac.setVisible(true);
-        VUsuarios u = new VUsuarios();
-      u.setVisible(true);
+       // VUsuarios u = new VUsuarios();
+     // u.setVisible(true);
                //Caja c = new Caja();
                 //c.setVisible(true);
-        VEmpleados v = new VEmpleados();
-        v.setVisible(true);
+       // VEmpleados v = new VEmpleados();
+       // v.setVisible(true);
         
     }
     
