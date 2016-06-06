@@ -4,22 +4,23 @@ import com.yasmin.bd.ConexionBD;
 import com.yasmin.ventanas.BuscarImagen;
 import static com.yasmin.ventanas.Caja.tarticulosCaja;
 import com.yasmin.ventanas.Stock2;
-import static com.yasmin.ventanas.VProductos.anadirCat;
-import static com.yasmin.ventanas.VProductos.anadirCod;
-import static com.yasmin.ventanas.VProductos.anadirNom;
-import static com.yasmin.ventanas.VProductos.anadirPre;
-import static com.yasmin.ventanas.VProductos.anadirStock;
-import static com.yasmin.ventanas.VProductos.busCod;
-import static com.yasmin.ventanas.VProductos.busquedaCat;
-import static com.yasmin.ventanas.VProductos.busquedaCod;
-import static com.yasmin.ventanas.VProductos.busquedaNom;
-import static com.yasmin.ventanas.VProductos.busquedaPre;
-import static com.yasmin.ventanas.VProductos.busquedaStock;
-import static com.yasmin.ventanas.VProductos.imagen;
-import static com.yasmin.ventanas.VProductos.jTable1;
-import static com.yasmin.ventanas.VProductos.jTable2;
+
 
 import static com.yasmin.ventanas.Caja.autoCompletar;
+import static com.yasmin.ventanas.Stock2.anadirCat;
+import static com.yasmin.ventanas.Stock2.anadirCod;
+import static com.yasmin.ventanas.Stock2.anadirNom;
+import static com.yasmin.ventanas.Stock2.anadirPre;
+import static com.yasmin.ventanas.Stock2.anadirStock;
+import static com.yasmin.ventanas.Stock2.busquedaCat;
+import static com.yasmin.ventanas.Stock2.busquedaCod;
+import static com.yasmin.ventanas.Stock2.busquedaNom;
+import static com.yasmin.ventanas.Stock2.busquedaPre;
+import static com.yasmin.ventanas.Stock2.busquedaStock;
+import static com.yasmin.ventanas.Stock2.imagen;
+import static com.yasmin.ventanas.Stock2.tInsert;
+import static com.yasmin.ventanas.Stock2.tablaDelete;
+import static com.yasmin.ventanas.Stock2.busCod;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -86,10 +87,10 @@ public class Productos {
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
         modelo.addColumn("Categoría");
-        jTable1.setModel(modelo);
+        tInsert.setModel(modelo);
         try {
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM articulo");
+            ResultSet rs = st.executeQuery("SELECT * FROM productos");
             String[] datos = new String[5];
             while (rs.next()) {
                 datos[0] = rs.getString(1);
@@ -99,7 +100,7 @@ public class Productos {
                 datos[4] = rs.getString(5);
                 modelo.addRow(datos);
             }
-            jTable1.setModel(modelo);
+            tInsert.setModel(modelo);
 
         } catch (SQLException ex) {
             System.out.println("Imposible visualizar ");
@@ -111,7 +112,7 @@ public class Productos {
      * @throws FileNotFoundException 
      */
     public void insertarProductos() throws FileNotFoundException {
-        String insert = "INSERT INTO articulo (idarticulo,descripcion,precio,stock,codcategoria,imagen) VALUES(?,?,?,?,?,?)";
+        String insert = "INSERT INTO productos (codp,descripcion,precio,stock,codc,imagen) VALUES(?,?,?,?,?,?)";
         FileInputStream foto;     
         try {
             PreparedStatement st = cn.prepareStatement(insert);
@@ -142,10 +143,10 @@ public class Productos {
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
         modelo.addColumn("Categoría");
-        jTable2.setModel(modelo);
+        tablaDelete.setModel(modelo);
         try {
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM articulo");
+            ResultSet rs = st.executeQuery("SELECT codp,nomp,precio,stock,nomc FROM productos p, categorias c WHERE p.codc=c.codc");
             String[] datos = new String[5];
             while (rs.next()) {
                 datos[0] = rs.getString(1);
@@ -155,7 +156,7 @@ public class Productos {
                 datos[4] = rs.getString(5);
                 modelo.addRow(datos);
             }
-            jTable2.setModel(modelo);
+            tablaDelete.setModel(modelo);
 
         } catch (SQLException ex) {
             System.out.println("Imposible visualizar ");
@@ -166,10 +167,10 @@ public class Productos {
      * Elimina el producto que se selecciona
      */
     public void eliminarProductos(){
-        int fila=jTable2.getSelectedRow();
+        int fila=tablaDelete.getSelectedRow();
         String cod="";
-        cod=jTable2.getValueAt(fila,0).toString();
-        String delete = "DELETE FROM producto WHERE idarticulo ='" + cod + "'";
+        cod=tablaDelete.getValueAt(fila,0).toString();
+        String delete = "DELETE FROM producto WHERE codp ='" + cod + "'";
         try {
             PreparedStatement ps = cn.prepareStatement(delete);
             ps.executeUpdate();
@@ -184,7 +185,7 @@ public class Productos {
      * Modifica un producto
      */
     public void modificarProductos(){
-        String update = "UPDATE producto SET "
+        String update = "UPDATE productos SET "
                 + "descripcion ='" + busquedaNom.getText() 
                 +"',precio =" + busquedaPre.getText()
                 +",stock= " + busquedaStock.getText()
@@ -197,9 +198,7 @@ public class Productos {
             JOptionPane.showMessageDialog(null,"Error al modificar el producto");
         }
     }
-    
-    
-    
+      
     /**
      * Métodos Clase Caja
      * 
