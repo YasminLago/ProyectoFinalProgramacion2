@@ -268,7 +268,6 @@
                                           <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                               </Group>
@@ -331,11 +330,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="unCent" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cincoCent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="dosCent" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="diezCent" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="veinteCent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cincoCent" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="diezCent" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="veinteCent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="cincuentaCent" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -347,11 +348,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cantidadM2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cantidadM1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cantidadM5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="cantidadM2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cantidadM5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cantidadM1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="cantidadM1e" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cantidadM50" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -460,9 +459,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">

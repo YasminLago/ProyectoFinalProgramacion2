@@ -5,10 +5,12 @@ package com.yasmin.ventanas;
  * @author Yasmín
  */
 public class JDialog extends javax.swing.JFrame {
+
     public JDialog() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

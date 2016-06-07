@@ -5,11 +5,11 @@ package com.yasmin.ventanas;
  * @author Yasmín
  */
 public class ArqueoCaja extends javax.swing.JFrame {
-    
+
     String totalMonedas = null;
     String totalBilletes = null;
     String totalSuma = null;
-    
+
     public ArqueoCaja() {
         initComponents();
         this.setLocationRelativeTo(null);//Ventana centrada
@@ -28,11 +28,11 @@ public class ArqueoCaja extends javax.swing.JFrame {
         totalB100.setEditable(false);
         totalB200.setEditable(false);
         totalB500.setEditable(false);
-        
+
         sumImporteM.setEditable(false);
         sumImporteB.setEditable(false);
         sumTotal.setEditable(false);
-        
+
         cantidadM1.setText("0");
         cantidadM2.setText("0");
         cantidadM5.setText("0");
@@ -49,101 +49,98 @@ public class ArqueoCaja extends javax.swing.JFrame {
         cantidadB200.setText("0");
         cantidadB500.setText("0");
     }
-    
+
     /*public void focusGained(java.awt.event.FocusEvent evt){
-        Object o = evt.getSource();
-        if(o instanceof javax.swing.JTextField){
-        javax.swing.JTextField txt = (javax.swing.JTextField) o;
-        txt.setSelectionStart(0);
-        txt.setSelectionEnd(txt.getText().length());
-        }
-    }
+     Object o = evt.getSource();
+     if(o instanceof javax.swing.JTextField){
+     javax.swing.JTextField txt = (javax.swing.JTextField) o;
+     txt.setSelectionStart(0);
+     txt.setSelectionEnd(txt.getText().length());
+     }
+     }
     
-    */
-    
+     */
     /**
      * Calcula el arqueo total de la caja
      */
-    public void calcularArqueo(){
-       int m1 = Integer.parseInt(cantidadM1.getText());
-       int m2 = Integer.parseInt(cantidadM2.getText());
-       int m5 = Integer.parseInt(cantidadM5.getText());
-       int m10 = Integer.parseInt(cantidadM10.getText());
-       int m20 = Integer.parseInt(cantidadM20.getText());
-       int m50 = Integer.parseInt(cantidadM50.getText());
-       int m1e = Integer.parseInt(cantidadM1e.getText());
-       int m2e = Integer.parseInt(cantidadM2e.getText());
-       int b5 = Integer.parseInt(cantidadB5.getText());
-       int b10 = Integer.parseInt(cantidadB10.getText());
-       int b20 = Integer.parseInt(cantidadB20.getText());
-       int b50 = Integer.parseInt(cantidadB50.getText());
-       int b100 = Integer.parseInt(cantidadB100.getText());
-       int b200 = Integer.parseInt(cantidadB200.getText());
-       int b500 = Integer.parseInt(cantidadB500.getText());
-      
-        
-       double cm1 = m1*0.01;
-       double cm2 = m2*0.02;
-       double cm5 = m5*0.05;
-       double cm10 = m10*0.10;
-       double cm20 = m20*0.20;
-       double cm50 = m50*0.50;
-       double cm1e = m1e*1.00;
-       double cm2e = m2e*2.00;
-       double cb5 = b5*5.00;
-       double cb10 = b10*10.00;
-       double cb20 = b20*20.00;
-       double cb50 = b50*50.00;
-       double cb100 = b100*100.00;
-       double cb200 = b200*200.00;
-       double cb500 = b500*500.00;
-       
-       totalM1.setText(Double.toString(cm1));
-       totalM2.setText(Double.toString(cm2));
-       totalM5.setText(Double.toString(cm5));
-       totalM10.setText(Double.toString(cm10));
-       totalM20.setText(Double.toString(cm20));
-       totalM50.setText(Double.toString(cm50));
-       totalM1e.setText(Double.toString(cm1e));
-       totalM2e.setText(Double.toString(cm2e));
-       totalB5.setText(Double.toString(cb5));
-       totalB10.setText(Double.toString(cb10));
-       totalB20.setText(Double.toString(cb20));
-       totalB50.setText(Double.toString(cb50));
-       totalB100.setText(Double.toString(cb100));
-       totalB200.setText(Double.toString(cb200));
-       totalB500.setText(Double.toString(cb500));
-       
-       /**
-        * Suma la cantidad en € de todas las monedas
-        */
-        Double [] sumMonedas = {cm1,cm2,cm5,cm10,cm20,cm50,cm1e,cm2e};
-        double sumaM = 0;
-            for(int i = 0;i<sumMonedas.length;i++){
-                sumaM +=sumMonedas[i];
-                totalMonedas = Double.toString(sumaM);
-            }
-            sumImporteM.setText(totalMonedas);
-        
+    public void calcularArqueo() {
+        int m1 = Integer.parseInt(cantidadM1.getText());
+        int m2 = Integer.parseInt(cantidadM2.getText());
+        int m5 = Integer.parseInt(cantidadM5.getText());
+        int m10 = Integer.parseInt(cantidadM10.getText());
+        int m20 = Integer.parseInt(cantidadM20.getText());
+        int m50 = Integer.parseInt(cantidadM50.getText());
+        int m1e = Integer.parseInt(cantidadM1e.getText());
+        int m2e = Integer.parseInt(cantidadM2e.getText());
+        int b5 = Integer.parseInt(cantidadB5.getText());
+        int b10 = Integer.parseInt(cantidadB10.getText());
+        int b20 = Integer.parseInt(cantidadB20.getText());
+        int b50 = Integer.parseInt(cantidadB50.getText());
+        int b100 = Integer.parseInt(cantidadB100.getText());
+        int b200 = Integer.parseInt(cantidadB200.getText());
+        int b500 = Integer.parseInt(cantidadB500.getText());
+
+        double cm1 = m1 * 0.01;
+        double cm2 = m2 * 0.02;
+        double cm5 = m5 * 0.05;
+        double cm10 = m10 * 0.10;
+        double cm20 = m20 * 0.20;
+        double cm50 = m50 * 0.50;
+        double cm1e = m1e * 1.00;
+        double cm2e = m2e * 2.00;
+        double cb5 = b5 * 5.00;
+        double cb10 = b10 * 10.00;
+        double cb20 = b20 * 20.00;
+        double cb50 = b50 * 50.00;
+        double cb100 = b100 * 100.00;
+        double cb200 = b200 * 200.00;
+        double cb500 = b500 * 500.00;
+
+        totalM1.setText(Double.toString(cm1));
+        totalM2.setText(Double.toString(cm2));
+        totalM5.setText(Double.toString(cm5));
+        totalM10.setText(Double.toString(cm10));
+        totalM20.setText(Double.toString(cm20));
+        totalM50.setText(Double.toString(cm50));
+        totalM1e.setText(Double.toString(cm1e));
+        totalM2e.setText(Double.toString(cm2e));
+        totalB5.setText(Double.toString(cb5));
+        totalB10.setText(Double.toString(cb10));
+        totalB20.setText(Double.toString(cb20));
+        totalB50.setText(Double.toString(cb50));
+        totalB100.setText(Double.toString(cb100));
+        totalB200.setText(Double.toString(cb200));
+        totalB500.setText(Double.toString(cb500));
+
         /**
-        * Suma la cantidad en € de todas los billetes
-        */    
-        Double [] sumBilletes = {cb5,cb10,cb20,cb50,cb100,cb200,cb500};
+         * Suma la cantidad en € de todas las monedas
+         */
+        Double[] sumMonedas = {cm1, cm2, cm5, cm10, cm20, cm50, cm1e, cm2e};
+        double sumaM = 0;
+        for (int i = 0; i < sumMonedas.length; i++) {
+            sumaM += sumMonedas[i];
+            totalMonedas = Double.toString(sumaM);
+        }
+        sumImporteM.setText(totalMonedas);
+
+        /**
+         * Suma la cantidad en € de todas los billetes
+         */
+        Double[] sumBilletes = {cb5, cb10, cb20, cb50, cb100, cb200, cb500};
         double sumaB = 0;
-            for(int i = 0;i<sumBilletes.length;i++){
-                sumaB += sumBilletes[i];
-                totalBilletes = Double.toString(sumaB);
-            }
-            sumImporteB.setText(totalBilletes);
-            
+        for (int i = 0; i < sumBilletes.length; i++) {
+            sumaB += sumBilletes[i];
+            totalBilletes = Double.toString(sumaB);
+        }
+        sumImporteB.setText(totalBilletes);
+
         /**
          * Total arqueo
          */
-            double sumaTotal =sumaM+sumaB;
-                totalSuma = Double.toString(sumaTotal);
-            sumTotal.setText(totalSuma);
+        double sumaTotal = sumaM + sumaB;
+        totalSuma = Double.toString(sumaTotal);
+        sumTotal.setText(totalSuma);
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -554,7 +551,6 @@ public class ArqueoCaja extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(bPonerACero)
                                         .addGap(157, 157, 157)))
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel21)
                                 .addGap(122, 122, 122))
                             .addGroup(panelArqueoLayout.createSequentialGroup()
@@ -601,11 +597,12 @@ public class ArqueoCaja extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(unCent)
-                    .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cincoCent)
-                        .addComponent(dosCent)
-                        .addComponent(diezCent)
-                        .addComponent(veinteCent))
+                    .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dosCent, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cincoCent)
+                            .addComponent(diezCent)
+                            .addComponent(veinteCent)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cincuentaCent)
                         .addComponent(unEuro)
@@ -614,10 +611,9 @@ public class ArqueoCaja extends javax.swing.JFrame {
                     .addGroup(panelArqueoLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cantidadM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cantidadM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cantidadM5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cantidadM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadM5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cantidadM1e, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cantidadM50, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -699,9 +695,9 @@ public class ArqueoCaja extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelArqueoLayout.createSequentialGroup()
-                        .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel30)
-                            .addComponent(jLabel31))
+                        .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel30))
                         .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelArqueoLayout.createSequentialGroup()
                                 .addGroup(panelArqueoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -777,41 +773,41 @@ public class ArqueoCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bPonerACeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPonerACeroActionPerformed
-       totalM1.setText("");
-       totalM2.setText("");
-       totalM5.setText("");
-       totalM10.setText("");
-       totalM20.setText("");
-       totalM50.setText("");
-       totalM1e.setText("");
-       totalM2e.setText("");
-       totalB5.setText("");
-       totalB10.setText("");
-       totalB20.setText("");
-       totalB50.setText("");
-       totalB100.setText("");
-       totalB200.setText("");
-       totalB500.setText("");
-       
-       cantidadM1.setText("");
-       cantidadM2.setText("");
-       cantidadM5.setText("");
-       cantidadM10.setText("");
-       cantidadM20.setText("");
-       cantidadM50.setText("");
-       cantidadM1e.setText("");
-       cantidadM2e.setText("");
-       cantidadB5.setText("");
-       cantidadB10.setText("");
-       cantidadB20.setText("");
-       cantidadB50.setText("");
-       cantidadB100.setText("");
-       cantidadB200.setText("");
-       cantidadB500.setText("");
-       
-       sumImporteM.setText("");
-       sumImporteB.setText("");
-       sumTotal.setText("");
+        totalM1.setText("");
+        totalM2.setText("");
+        totalM5.setText("");
+        totalM10.setText("");
+        totalM20.setText("");
+        totalM50.setText("");
+        totalM1e.setText("");
+        totalM2e.setText("");
+        totalB5.setText("");
+        totalB10.setText("");
+        totalB20.setText("");
+        totalB50.setText("");
+        totalB100.setText("");
+        totalB200.setText("");
+        totalB500.setText("");
+
+        cantidadM1.setText("");
+        cantidadM2.setText("");
+        cantidadM5.setText("");
+        cantidadM10.setText("");
+        cantidadM20.setText("");
+        cantidadM50.setText("");
+        cantidadM1e.setText("");
+        cantidadM2e.setText("");
+        cantidadB5.setText("");
+        cantidadB10.setText("");
+        cantidadB20.setText("");
+        cantidadB50.setText("");
+        cantidadB100.setText("");
+        cantidadB200.setText("");
+        cantidadB500.setText("");
+
+        sumImporteM.setText("");
+        sumImporteB.setText("");
+        sumTotal.setText("");
     }//GEN-LAST:event_bPonerACeroActionPerformed
 
 

@@ -1,48 +1,30 @@
 package com.yasmin.ventanas;
 
-
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import com.yasmin.bd.ConexionBD;
 import com.yasmin.clases.Empleados;
 import static com.yasmin.ventanas.JDialog.lPreguntaDialog;
-import static com.yasmin.ventanas.JDialog.lImagenJD;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Blob;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author Yasmín
  */
 public class Login extends javax.swing.JFrame {
-    
+
     ConexionBD cc = new ConexionBD();
     Connection cn = cc.ConexionBD();
     Empleados e = new Empleados();
     JDialog j = new JDialog();
-        
-    
+
     public Login() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
         e.llenarCBTipoUsers();
-        //bAceptar.setMnemonic('');
+
     }
-        
-    
-    
-   
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,21 +111,21 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        if(e.login()==1){
-          this.dispose();
-          JOptionPane.showMessageDialog(null,"Login correcto");  
-          Stock2 s = new Stock2();
-          s.setVisible(true);
-      }else{
-          JOptionPane.showMessageDialog(null,"Usuario y/o contraseña incorrecta");
-      }
+        if (e.login() == 1) {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Login correcto");
+            Stock2 s = new Stock2();
+            s.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta");
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-        if(evt.getSource()==bSalir){
-           lPreguntaDialog.setText("¿Está seguro de que desea salir?");
-           j.setVisible(true);
-        } 
+        if (evt.getSource() == bSalir) {
+            lPreguntaDialog.setText("¿Está seguro de que desea salir?");
+            j.setVisible(true);
+        }
     }//GEN-LAST:event_bSalirActionPerformed
 
 

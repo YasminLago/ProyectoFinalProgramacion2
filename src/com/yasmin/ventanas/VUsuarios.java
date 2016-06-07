@@ -1,38 +1,34 @@
 package com.yasmin.ventanas;
 
-import com.yasmin.clases.Empleados;
 import com.yasmin.clases.Usuarios;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Yasmín
  */
 public class VUsuarios extends javax.swing.JFrame {
-    
+
     Usuarios u = new Usuarios();
-    
+
     public VUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);//Ventana centrada
         u.listaTablaUsuarios();
         u.llenarCBTpU();
-        
+
         bEliminar.setEnabled(false);
         bModificarU.setEnabled(false);
         bGuardar.setEnabled(false);
         bAñadir.setEnabled(false);
-        
+
         nomU.setEditable(false);
         tpU.setEnabled(false);
         claveU.setEditable(false);
-        
+
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -283,14 +279,13 @@ public class VUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUMouseClicked
-        int row = tablaU.rowAtPoint(evt.getPoint());   
-        nomU.setText(tablaU.getModel().getValueAt(row, 0).toString()); 
+        int row = tablaU.rowAtPoint(evt.getPoint());
+        nomU.setText(tablaU.getModel().getValueAt(row, 0).toString());
         tpU.setSelectedItem(tablaU.getModel().getValueAt(row, 1).toString());
         claveU.setText(tablaU.getModel().getValueAt(row, 2).toString());
-        
-        
+
         bModificarU.setEnabled(true);
-        bGuardar.setEnabled(false);    
+        bGuardar.setEnabled(false);
         bAñadir.setEnabled(false);
         bEliminar.setEnabled(true);
     }//GEN-LAST:event_tablaUMouseClicked
@@ -301,7 +296,7 @@ public class VUsuarios extends javax.swing.JFrame {
         claveU.setEditable(true);
         bEliminar.setEnabled(false);
         bModificarU.setEnabled(false);
-        bGuardar.setEnabled(true);   
+        bGuardar.setEnabled(true);
     }//GEN-LAST:event_bModificarUActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
@@ -324,8 +319,8 @@ public class VUsuarios extends javax.swing.JFrame {
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
         try {
             u.insertUsuarios();
-        } catch (SQLException ex) {       
-        } catch (IOException ex) {   
+        } catch (SQLException ex) {
+        } catch (IOException ex) {
         }
         bAñadir.setEnabled(false);
         bNuevo.setEnabled(true);
@@ -338,12 +333,11 @@ public class VUsuarios extends javax.swing.JFrame {
         nomU.setEditable(true);
         tpU.setEnabled(true);
         claveU.setEditable(true);
-        
-        
+
         nomU.setText("");
         tpU.setSelectedIndex(0);
         claveU.setText("");
-        
+
         bAñadir.setEnabled(true);
         bModificarU.setEnabled(false);
         bGuardar.setEnabled(false);
@@ -359,8 +353,8 @@ public class VUsuarios extends javax.swing.JFrame {
         }
         bEliminar.setEnabled(false);
         bModificarU.setEnabled(false);
-        
-        nomU.setText(""); 
+
+        nomU.setText("");
         tpU.setSelectedIndex(0);
         claveU.setText("");
     }//GEN-LAST:event_bEliminarActionPerformed

@@ -3,28 +3,26 @@ package com.yasmin.ventanas;
 import com.yasmin.clases.Empleados;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Yasmín
  */
 public class VEmpleados extends javax.swing.JFrame {
-    
+
     Empleados e = new Empleados();
-    
+
     public VEmpleados() {
         initComponents();
         this.setLocationRelativeTo(null);//Ventana centrada
         e.listaTablaEmpleados();
         e.llenarCBTpE();
-        
+
         bEliminarEmpl.setEnabled(false);
         bModificarE.setEnabled(false);
         bGuardarEmpl.setEnabled(false);
         bAñadirEmpl.setEnabled(false);
-        
+
         dniE.setEditable(false);
         nomE.setEditable(false);
         apeE.setEditable(false);
@@ -32,7 +30,6 @@ public class VEmpleados extends javax.swing.JFrame {
         telE.setEditable(false);
         tpE.setEnabled(false);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -295,20 +292,20 @@ public class VEmpleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAñadirEmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirEmplActionPerformed
-       try {
+        try {
             e.insertEmpleados();
         } catch (SQLException ex) {
         } catch (IOException ex) {
         }
         bAñadirEmpl.setEnabled(false);
-        
+
         dniE.setEditable(false);
         nomE.setEditable(false);
         apeE.setEditable(false);
         dirE.setEditable(false);
         telE.setEditable(false);
         tpE.setEnabled(false);
-        
+
         bNuevoEmpl.setEnabled(true);
     }//GEN-LAST:event_bAñadirEmplActionPerformed
 
@@ -320,7 +317,7 @@ public class VEmpleados extends javax.swing.JFrame {
         }
         bEliminarEmpl.setEnabled(false);
         bModificarE.setEnabled(false);
-        
+
         dniE.setText("");
         nomE.setText("");
         apeE.setText("");
@@ -340,7 +337,6 @@ public class VEmpleados extends javax.swing.JFrame {
         dirE.setEditable(true);
         telE.setEditable(true);
         tpE.setEnabled(true);
-        
 
         dniE.setText("");
         nomE.setText("");
@@ -348,8 +344,7 @@ public class VEmpleados extends javax.swing.JFrame {
         dirE.setText("");
         telE.setText("");
         tpE.setSelectedIndex(0);
-        
-        
+
         bNuevoEmpl.setEnabled(false);
         bAñadirEmpl.setEnabled(true);
         bModificarE.setEnabled(false);
@@ -364,19 +359,19 @@ public class VEmpleados extends javax.swing.JFrame {
         dirE.setEditable(true);
         telE.setEditable(true);
         tpE.setEnabled(true);
-        
+
         bEliminarEmpl.setEnabled(false);
         bModificarE.setEnabled(false);
         bGuardarEmpl.setEnabled(true);
     }//GEN-LAST:event_bModificarEActionPerformed
 
     private void bGuardarEmplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarEmplActionPerformed
-       try {
+        try {
             e.modificarEmpleados();
         } catch (SQLException ex) {
         } catch (IOException ex) {
         }
-       
+
         bModificarE.setEnabled(true);
         bGuardarEmpl.setEnabled(false);
         dniE.setEditable(false);
@@ -385,8 +380,8 @@ public class VEmpleados extends javax.swing.JFrame {
         dirE.setEditable(false);
         telE.setEditable(false);
         tpE.setEnabled(false);
-        
-       
+
+
     }//GEN-LAST:event_bGuardarEmplActionPerformed
 
     private void tablaEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEMouseClicked
@@ -397,7 +392,7 @@ public class VEmpleados extends javax.swing.JFrame {
         dirE.setText(tablaE.getModel().getValueAt(row, 3).toString());
         telE.setText(tablaE.getModel().getValueAt(row, 4).toString());
         tpE.setSelectedItem(tablaE.getModel().getValueAt(row, 5).toString());
-        
+
         bModificarE.setEnabled(true);
         bEliminarEmpl.setEnabled(true);
     }//GEN-LAST:event_tablaEMouseClicked
